@@ -12,7 +12,7 @@
 	<artifactId>TechTalentTwitter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>TechTalentTwitter</name>
-	<description>Springboot version of twitter</description>
+	<description>Spring boot version of Twitter</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -41,6 +41,13 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
+
+			<dependency>
+				<groupId>org.ocpsoft.prettytime</groupId>
+				<artifactId>prettytime</artifactId>
+				<version>4.0.1.Final</version>
+			</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Info</title>
+</head>
+<body>
+<h5>Joined <span th:text="${#dates.format(user.createdAt, 'MMMM dd, yyyy')}"></span></h5>
+<form th:action="@{/follow/} + ${user.username}" th:if="${!following}" method="post">
+    <button style="float:right" type="Submit" class="btn btn-lg btn-success">Follow</button>
+</form>
+<form th:action="@{/unfollow/} + ${user.username}" th:if="${following}" method="post">
+    <button style="float:right" type="Submit" class="btn btn-lg btn-primary unfollow_btn">Following</button>
+</form>
+
+<h3>Tweets</h3>
+<div class="list-group" th:each="tweet:${tweetList}">
+    <div class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5>@<span th:text="${tweet.user.username}"></span>
+                <smal><span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></small></h5>
+        </div>
+        <p class="mb-1" th:utext="${tweet.message}"></p>
+    </div>
+</div>
+<div th:if="${not #lists.isEmpty(tweetList)}">
+    <h3>Tweets</h3>
+</div>
+<div th:if="${#lists.isEmpty(tweetList)}">
+    <h3>No Recent Tweets</h3>
+</div>
+
+</body>
+</html>

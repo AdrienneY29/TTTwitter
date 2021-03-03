@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
+<meta charset="UTF-8">
+<title>Registration</title>
 <head>
-    <title>Log in</title>
+    <title>registration</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <link rel="stylesheet" href="/custom.css">
@@ -11,7 +12,9 @@
     <script src="/custom.js"></script>
 </head>
 <body>
+<body>
 <div class="container">
+    <div th:replace="fragments/navbar"></div>
     <h2>Sign up</h2>
     <form th:action="@{/signup}" th:object="${user}" method="post" autocomplete="off" >
         <div class="form-group">
@@ -35,7 +38,7 @@
             <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
         </div>
         <div class="form-group">
-            <button class="btn btn-md btn-success btn-block" name="Submit" value="Submit" type="Submit" th:text="Submit"></button>
+            <button class="btn btn-md btn-success btn-block" name="Submit" value="Submit" type="Submit" th:text="Submit" ></button>
         </div>
     </form>
 </div>
