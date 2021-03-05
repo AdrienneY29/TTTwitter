@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div th:fragments="navbar">
 <nav class="row navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -25,5 +26,6 @@
         </div>
     </div>
 </nav>
+</div>
 </body>
 </html>

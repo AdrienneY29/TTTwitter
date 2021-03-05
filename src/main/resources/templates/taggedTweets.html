@@ -4,9 +4,13 @@
 <head>
 
     <title id="title">Feed</title>
-
     <div th:replace="/fragments/headlinks :: head-styles" ></div>
-
+<!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<!--        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">-->
+<!--        <link rel="stylesheet" href="/custom.css">-->
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+<!--        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<!--        <script src="/custom.js"></script>-->
 </head>
 <body>
 
@@ -16,7 +20,9 @@
     <div class="list-group" th:each="tweet:${tweetList}">
         <div class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
-                <a class="username" th:href="@{/users/} + ${tweet.user.username}">@<span th:text="${tweet.user.username}"></span></a><small> <span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></small>
+                <a class="username" th:href="@{/users/} + ${tweet.user.username}">@<span th:text="${tweet.user.username}"></span></a>
+<!--                <small><span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></small>-->
+                <small th:text="${tweet.date}"></small>
             </div>
             <p class="mb-1" th:utext="${tweet.message}"></p>
         </div>

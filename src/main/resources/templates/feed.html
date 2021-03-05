@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<meta charset="UTF-8">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Tweet Feed</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <link rel="stylesheet" href="/custom.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/custom.js"></script>
+    <meta charset="UTF-8">
+    <title>TweetFeed</title>
+    <div th:replace="/fragments/headlinks :: head-styles" ></div>
+
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">-->
+<!--    <link rel="stylesheet" href="/custom.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<!--    <script src="/custom.js"></script>-->
 </head>
 <body>
 <div class="container">
     <div th:replace="fragments/navbar"></div>
+    <ul class="nav nav-tabs">
+        <li role="presentation" th:classappend="${filter == 'all' ? 'active' : '' }">
+            <a href="/tweets">All</a></li>
+        <li role="presentation" th:classappend="${filter == 'followers' ? 'active' : '' }">
+            <a href="/users?filter=followers">Followers</a></li>
+        <li role="presentation" th:classappend="${filter == 'following' ? 'active' : '' }">
+            <a href="/tweets?filter=following">Following</a></li>
+    </ul><br/>
     <h2>Tweets</h2>
-    <!-- this is where i change from all tweets showing to showing only tweets the user is following -->
-    <!-- added th:if="${!following}" below before th:each-->
-    <div  th:each="tweet:${tweetList}">
-        <!-- this is where I removed this th:text="${tweet.user.username}" to add username links th:href below -->
+    <div th:each="tweet:${tweetList}">
         <h5>@<span th:text="${tweet.user.username}"></span>
-            <small><span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></small></h5>
+            <small th:text="${tweet.date}"></small></h5>
+<!--            <small><span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></small></h5>-->
         <p th:utext="${tweet.message}"></p>
     </div>
+    <div th:if="${#lists.isEmpty(tweetList) and filter == 'all'}">
+        <h3>No tweets have been created yet</h3>
+    </div>
+    <div th:if="${#lists.isEmpty(tweetList) and filter == 'following'}">
+        <h3>No tweets have been created by your followers</h3>
+    </div>
+    <div th:if="${#lists.isEmpty(users) and filter == 'followers'}"><center><h3>You don't have any followers</h3></center></div>
+    <div th:if="${#lists.isEmpty(users) and filter == 'following'}"><center><h3>You're not following anyone</h3></center></div>
 </div>
 </body>
 </html>
